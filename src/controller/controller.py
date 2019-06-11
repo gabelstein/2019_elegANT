@@ -26,6 +26,9 @@ class Controller:
 
         self.event_list_game_view = {
             'build_scout': self.create_ant,
+            'build_soldier': self.create_ant,
+            'build_queen': self.create_ant,
+            'show_build_ants': self.show_build_ants_dialog,
             'quit_game': self.exit_game
         }
 
@@ -60,21 +63,32 @@ class Controller:
         """
         sys.exit()
 
-    def create_ant(self, button):
+    def create_ant(self, identifier):
         """
         Event-handler for creating ants using the create ants button
         :param button: Create Ants button
         :return: nothing
         """
+        button = self.view.get_element_by_id(identifier)
         button.state = 'loading'
 
         def _create_ant():
             time.sleep(all_params.controller_params.create_ant_time)
             nest = self.game_state.get_nests()[0]
             self.game_state.create_ants(nest, amount=1)
-            self.view.increment_ant_count()
+            self.view.increment_ant_count(type=button.ant_type)
 
         create_thread(func=_create_ant)
+
+    def show_build_ants_dialog(self, button):
+        """
+        Event-handler for displaying create ants dialog
+        :param button: Show Build Ants Dialog
+        :return: nothing
+        """
+        view = button.view
+        dialog = view.get_element_by_id('view_box_id_add_ants_box')
+        dialog.toggle()
 
     def get_events(self, view_state):
 
@@ -88,10 +102,12 @@ class Controller:
 
         # Get the list of events from view
         event_argument_list = self.view.events()
-
+        print("events", self.view.events())
         # Getting events and arguments as two lists
         event = list(event_argument_list.keys())
         args = list(event_argument_list.values())
+        print("event", event)
+        print("args", args)
         for i in range(len(event)):
             if event[i] in self.event_list[view_state].keys():
                 if args[i] is not None:
