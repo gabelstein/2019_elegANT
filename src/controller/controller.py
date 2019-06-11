@@ -26,8 +26,6 @@ class Controller:
 
         self.event_list_game_view = {
             'build_scout': self.create_ant,
-            'build_soldier': self.create_ant,
-            'build_queen': self.create_ant,
             'show_build_ants': self.show_build_ants_dialog,
             'quit_game': self.exit_game
         }
@@ -102,12 +100,9 @@ class Controller:
 
         # Get the list of events from view
         event_argument_list = self.view.events()
-        print("events", self.view.events())
         # Getting events and arguments as two lists
         event = list(event_argument_list.keys())
         args = list(event_argument_list.values())
-        print("event", event)
-        print("args", args)
         for i in range(len(event)):
             if event[i] in self.event_list[view_state].keys():
                 if args[i] is not None:
