@@ -5,6 +5,7 @@ from .button import Button
 from .button_build_scout import BuildScoutButton
 from .color_selector import ColorSelector
 from .input_box import InputBox
+from .food_bar import FoodBar
 # TODO check if these imports are necessary
 # from .nest import Nest
 # from .ant import Ant
@@ -39,7 +40,7 @@ class View:
             self.screen = pygame.display.set_mode(true_res, pygame.FULLSCREEN)
 
         else:
-            self.screen = pygame.display.set_mode((self.res_width, self.res_height), pygame.FULLSCREEN)
+            self.screen = pygame.display.set_mode((self.res_width, self.res_height))
 
         self.background_color = pygame.Color("white")
         self.mouse_pos = pygame.mouse.get_pos()
@@ -161,6 +162,9 @@ class View:
         change_scout_stats.on("click", lambda: self.get_element_by_id("view_box_id_scout_box").toggle())
 
         self.add_element(change_scout_stats)
+
+        self.add_element(FoodBar(self, "food_bar", self.width * 0.35, self.height * 0.02, self.width * 0.3,
+                                 self.height * 0.05))
 
     def add_element(self, ui_element):
         self.elements[ui_element.identifier] = ui_element
