@@ -4,11 +4,12 @@ from .view_element import ViewElement
 
 class FoodBar(ViewElement):
     def __init__(self, view, identifier, x, y, width, height, color=pygame.Color("white"),
-                 value=100, max_value=1000, shape='square'):
+                 value=500, max_value=1000, shape='square'):
         super(FoodBar, self).__init__(view, identifier, x, y, width, height)
         self.color = color
         self.color2 = pygame.Color("gray")
         self.shape = shape
+        self.z_index = 20
         self.value = value
         self.max_value = max_value
 

@@ -70,6 +70,10 @@ class World(ViewElement):
                     view_element.has_food = element.has_food
                 if type(element) == Model_Food:
                     view_element.value = element.size
+                if type(element) == Model_Nest:
+                    view_element.value = element.health
+                    self.view.get_element_by_id(("food_bar")).value = element.health
+
             # Create elements
             else:
                 view_x, view_y = self._to_view_coordinates(element.position)
@@ -78,6 +82,7 @@ class World(ViewElement):
                 if type(element) == Model_Nest:
                     self.game_elements[element.id] = Nest(self.view, element.id, view_x,
                                                           view_y, 128, color, element.health)
+                    self.view.get_element_by_id(("food_bar")).value = element.health
 
                 elif type(element) == Model_Ant:
                     self.game_elements[element.id] = Ant(self.view, element.id, view_x, view_y,
@@ -87,6 +92,8 @@ class World(ViewElement):
                 
                 # Establish z-index order
                 self.game_elements = OrderedDict(sorted(self.game_elements.items(), key=lambda x: x[1].z_index))
+
+            # update food_bar
 
         # Remove out of view elements
         for element_id in list(self.game_elements.keys()):
