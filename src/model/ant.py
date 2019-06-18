@@ -10,11 +10,16 @@ distance = np.linalg.norm
 
 
 class Ant(GameObject, ABC):
-    def __init__(self, player, home_nest, foodiness=0, inscentiveness=0, directionism=0, explorativeness=0):
-        """Initialize ant object owner and position
+    def __init__(self, player, home_nest, foodiness, inscentiveness, directionism, explorativeness):
+        """
 
-        :param player: (Player) Owning Player of the ant
-        :param home_nest: (Nest) Coordinates of ant position
+        :param player: Owning Player of the ant
+        :param home_nest: Coordinates of ant position
+        :param foodiness: How attracted the ant is to food
+        :param inscentiveness:  Movement preference for high intensity of pheromone
+        :param directionism: How much momentum the ant has
+        :param explorativeness: How far from the nest the ant journeys
+
 
         """
         position = home_nest.position.copy()
@@ -26,8 +31,9 @@ class Ant(GameObject, ABC):
         # All ants always have these
         self.energy = all_params.ant_model_params.initial_energy
         self.direction = all_params.ant_model_params.initial_direction
-        self.home = home_nest
         self.direction_memory = all_params.ant_model_params.direction_memory
+        self.home = home_nest
+
 
         # Different ant types use a different subset of these parameters. All ants ar instantiated with all present
         # parameters, and the ant type itself decides which ones to use. This mechanism is consists of the fact that
