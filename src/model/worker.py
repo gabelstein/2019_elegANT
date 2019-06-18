@@ -11,9 +11,10 @@ distance = np.linalg.norm
 
 
 class Worker(Ant):
+    # TODO: this needs to be divded into two different types of ants
     """
-            A class used to represent an ant object
-            It inherits from GameObject class
+            A class used to represent a worker object
+            It inherits from Ant class
 
             ...
 
@@ -54,7 +55,7 @@ class Worker(Ant):
 
     """
 
-    def __init__(self, player, home_nest, foodiness=1, inscentiveness=1, directionism=1, explorativeness=1):
+    def __init__(self, player, home_nest, foodiness=1., inscentiveness=1., directionism=1., explorativeness=1.):
         """Initialize ant object owner and position
 
         :param player: (Player) Owning Player of the ant
@@ -73,7 +74,7 @@ class Worker(Ant):
         self.pheromone_dist_decay = all_params.ant_model_params.pheromone_dist_decay
 
     # TODO: Please decide which type of ant is going to use which of these parameters and make 100% sure to remove the
-    #  methods related to unsued ones
+    #  methods related to unused ones
     @property
     def foodiness(self):
         return self.__foodiness
