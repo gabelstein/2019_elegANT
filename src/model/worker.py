@@ -11,6 +11,7 @@ distance = np.linalg.norm
 
 
 class Worker(Ant):
+    # TODO: this needs to be divded into two different types of ants
     """
             A class used to represent an ant object
             It inherits from GameObject class
