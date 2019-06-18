@@ -34,7 +34,6 @@ class Ant(GameObject, ABC):
         self.direction_memory = all_params.ant_model_params.direction_memory
         self.home = home_nest
 
-
         # Different ant types use a different subset of these parameters. All ants ar instantiated with all present
         # parameters, and the ant type itself decides which ones to use. This mechanism is consists of the fact that
         # the abstract class has setters for all of these values that automatically set these parameters to an invalid
