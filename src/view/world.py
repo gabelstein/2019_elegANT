@@ -68,7 +68,7 @@ class World(ViewElement):
             if element.id in self.game_elements.keys():
                 view_element = self.game_elements[element.id]
                 view_element.x, view_element.y = self._to_view_coordinates(element.position)
-                if type(element) == Model_Ant:
+                if type(element) == Model_Worker:
                     view_element.direction = element.direction
                     view_element.has_food = element.has_food
                 if type(element) == Model_Food:
