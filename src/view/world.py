@@ -6,12 +6,14 @@ from pygame import K_UP, K_RIGHT, K_DOWN, K_LEFT, K_PLUS, K_MINUS
 from .view_element import ViewElement
 from .nest import Nest
 from .ant import Ant
+from .pheromone import Pheromone
 from .food_source import FoodSource
 from .mini_map import MiniMap
 
 from src.model.nest import Nest as Model_Nest
-from src.model.ant import Ant as Model_Ant
-from src.model.ant import Food as Model_Food
+from src.model.worker import Worker as Model_Worker
+from src.model.food import Food as Model_Food
+from src.model.pheromone import Pheromone as Model_Pheromone
 
 
 class World(ViewElement):
@@ -86,12 +88,15 @@ class World(ViewElement):
                                                           view_y, 128, color, element.health)
                     self.view.get_element_by_id(("food_bar")).value = element.health
 
-                elif type(element) == Model_Ant:
+                elif type(element) == Model_Worker:
                     self.game_elements[element.id] = Ant(self.view, element.id, view_x, view_y,
                                                          color, element.direction, element.energy)
                 elif type(element) == Model_Food:
                     self.game_elements[element.id] = FoodSource(self.view, element.id, view_x, view_y, 128, 100)
-                
+                elif type(element) == Model_Pheromone:
+                    self.game_elements[element.id] = Pheromone(self.view, element.id, view_x,
+                                                               view_y, element.strength, color)
+
                 # Establish z-index order
                 self.game_elements = OrderedDict(sorted(self.game_elements.items(), key=lambda x: x[1].z_index))
 
