@@ -18,7 +18,7 @@ class Ant(ViewElement):
         
         rotation = math.atan2(self.direction[0], self.direction[1]) * (180 / math.pi) * -1
         ant_img = pygame.transform.rotate(ant_img, rotation)
+        ant_img = pygame.transform.scale(ant_img, (int(self.width), int(self.height)))
         loc = ant_img.get_rect().center
         loc = (self.x - (loc[0]), self.y - (loc[1]))
-        
         self.view.screen.blit(ant_img, loc)

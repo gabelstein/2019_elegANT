@@ -5,6 +5,7 @@ from .button import Button
 from .color_selector import ColorSelector
 from .input_box import InputBox
 from .food_bar import FoodBar
+from .mini_map import MiniMap
 # TODO check if these imports are necessary
 # from .nest import Nest
 # from .ant import Ant
@@ -161,6 +162,9 @@ class View:
 
         self.add_element(FoodBar(self, "food_bar", self.width * 0.35, self.height * 0.02, self.width * 0.3,
                                  self.height * 0.05))
+
+        self.add_element(MiniMap(self, "mini_map", self.width * 0.75, self.height * 0.75, self.height * 0.2,
+                                 self.height * 0.2))
 
     def add_element(self, ui_element):
         self.elements[ui_element.identifier] = ui_element

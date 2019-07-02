@@ -7,6 +7,7 @@ from .view_element import ViewElement
 from .nest import Nest
 from .ant import Ant
 from .food_source import FoodSource
+from .mini_map import MiniMap
 
 from src.model.nest import Nest as Model_Nest
 from src.model.ant import Ant as Model_Ant
@@ -94,7 +95,8 @@ class World(ViewElement):
                 # Establish z-index order
                 self.game_elements = OrderedDict(sorted(self.game_elements.items(), key=lambda x: x[1].z_index))
 
-            # update food_bar
+        # update minimap
+        self.view.get_element_by_id("mini_map").elements = list(self.game_elements.values())
 
         # Remove out of view elements
         for element_id in list(self.game_elements.keys()):
